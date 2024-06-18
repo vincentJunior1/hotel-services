@@ -3,7 +3,7 @@ module.exports = {
       const result = {}
       result.status = status || 200
       result.message = msg
-      result.data = data
+      result.hotels = data
       result.pagination = pagination
   
       return res.status(result.status).json(result)

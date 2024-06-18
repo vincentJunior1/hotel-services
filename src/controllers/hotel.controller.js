@@ -6,10 +6,7 @@ module.exports = {
     GetHotels: async(req,res) => {
         try {
             let data = await hotelServices.GetAllHotel(req.query)
-            let response = {
-                hotel: data
-            }
-            helpers.response(res, 200, "Success",response)
+            helpers.response(res, 200, "Success",data)
         }catch(err) {
             helpers.response(res, 400, err)
         }
@@ -23,10 +20,7 @@ module.exports = {
                 date,
             } = req.body
             let data = await hotelServices.CreateHotel({name, city,price,date})
-            let response = {
-                hotel: data
-            }
-            helpers.response(res, 201, "Success", response)
+            helpers.response(res, 201, "Success",data)
         }catch(err) {
             let msg = "Bad Request"
             if (err.errors != null) {
@@ -46,10 +40,7 @@ module.exports = {
                 code = 404
                 msg = "Data not found"
             }
-            let response = {
-                hotel: data
-            }
-            helpers.response(res, code, msg, response)
+            helpers.response(res, code, msg, data)
         }catch(err) {
             helpers.response(res, 400, "Bad Request")
         }
@@ -68,10 +59,7 @@ module.exports = {
                 code = 404
                 msg = "Data not found"
             }
-            let response = {
-                hotel: data
-            }
-            helpers.response(res, 200, "Success", response)
+            helpers.response(res, 200, "Success", data)
         }catch(err) {
             console.log(err)
             let msg = "Unprocesssable Entity"
@@ -107,9 +95,6 @@ module.exports = {
             } = req.body
 
             let data = await hotelServices.EditHotelById(id, {name, city, price,date})
-            let response = {
-                hotel: data
-            }
             helpers.response(res, 200, "Success", data)
         }catch(err) {
             console.log(err)
