@@ -82,8 +82,9 @@ module.exports = {
         await hotel.deleteOne({_id: id})
     },
     EditHotelById: async (id, payload) => {
-        let newTmpHotel = await tmpHotel.findById(id)
+        let newTmpHotel = await tmpHotel.findBy({parent_id: payload.parent_id})
 
+        newHotel.parent_id = payload.parent_id
         newHotel.name = payload.name
         newHotel.city = payload.city
         newHotel.price = payload.price
