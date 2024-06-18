@@ -2,10 +2,10 @@ const mongoose = require("mongoose")
 
 var schema = new mongoose.Schema(
     {
-        name: String,
-        city: String,
-        price: Number,
-        date: Date,
+        name: {type: String, required: true},
+        city: {type: String, required: true},
+        price: {type: Number, required: true},
+        date: {type: Date, required: true},
     }
 )
 
