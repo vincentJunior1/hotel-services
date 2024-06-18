@@ -1,4 +1,5 @@
 const hotel = require("../repository/hotel.repository")
+const tmpHotel = require("../repository/editHotel.repository")
 const moment = require("moment")
 module.exports = {
 
@@ -79,5 +80,17 @@ module.exports = {
     },
     DeleteHotelById: async (id) => {
         await hotel.deleteOne({_id: id})
+    },
+    EditHotelById: async (id, payload) => {
+        let newTmpHotel = await tmpHotel.findById(id)
+
+        newHotel.name = payload.name
+        newHotel.city = payload.city
+        newHotel.price = payload.price
+        newHotel.date = moment(payload.date,'DD-MM-YYYY').utcOffset(0, true).toDate()
+
+        let data = await newTmpHotel.save()
+
+        return data
     }
 }

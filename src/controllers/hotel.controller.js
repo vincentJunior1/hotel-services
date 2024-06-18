@@ -86,5 +86,27 @@ module.exports = {
         }catch(err) {
             helpers.response(res, 400, "Bad Request")
         }
+    },
+    EditHotelById: async(req, res) => {
+        try {
+            let {id} = req.params
+            let {
+                name,
+                city,
+                price,
+                date,
+            } = req.body
+
+            let data = await hotelServices.EditHotelById(id, {name, city, price,date})
+            helpers.response(res, 200, "Success", data)
+        }catch(err) {
+            console.log(err)
+            let msg = "Unprocesssable Entity"
+            if (err.errors != null) {
+                let field = err.errors.name.properties.path
+                msg = `Field ${field} is required`
+            }
+            helpers.response(res, 422, msg)
+        }
     }
 }

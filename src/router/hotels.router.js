@@ -7,5 +7,6 @@ router.post("/", controllers.CreateHotel)
 router.get("/:id", controllers.FindHotelById)
 router.put("/:id", controllers.UpdateHotelById)
 router.delete("/:id", controllers.DeleteHotelById)
+router.put("/edit/:id", controllers.EditHotelById)
 
 module.exports = router
